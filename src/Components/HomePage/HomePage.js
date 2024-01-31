@@ -27,6 +27,7 @@ const HomePage = () => {
       <div className='shows-list'>
         {showsList.map((item) => (
           <ShowCard 
+            show = {item}
             key={item.show.id}
             name={item.show.name} 
             language={item.show.language} 

@@ -1,0 +1,97 @@
+.summary-contents{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    padding: 20px 5px;
+}
+
+.summary-card{
+    padding: 20px 5px;
+    width: 500px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.details-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.summary-image{
+    width: 50%;
+}
+
+.summary-show-details{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-details{
+    width: 400px;
+    height: 400px;
+    border-radius: 10px;
+    padding: 1px 1px 1px 20px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.book-tickets-button{
+    width: 100%;
+    height: 30px;
+    background-color: #3498db;
+    border: 1px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.happy-msg{
+    color:blueviolet;
+    font-size: larger;
+    font-weight: 800;
+}
+
+@media only screen and (max-width: 520px) {
+    .summary-card{
+        width: 300px;
+    }
+
+    .details-div{
+        justify-content: center;
+    }
+
+    .summary-image{
+        width: 90%;
+        height: 300px;
+    }
+
+    .summary-show-details{
+        width: 60%;
+    }
+
+    .form-details{
+        width: 300px;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .summary-card{
+        width: 250px;
+    }
+    .form-details{
+        width: 250px;
+    }
+}
