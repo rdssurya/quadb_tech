@@ -25,4 +25,44 @@
 .show-details{
     display: flex;
     flex-direction: column;
+    gap: 10px;
+}
+
+.book-button{
+    height: 30px;
+    background-color: #3498db;
+    border: 1px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.card:hover{
+    background-color: beige;
+}
+
+@media only screen and (max-width: 450px) {
+    .card{
+        width: 330px;
+    }
+    .book-button{
+        width: 80%;
+        font-size: 12px;
+    }
+    .show-img{
+        width: 80%;
+        height: 80%;
+    }
+}
+
+@media only screen and (max-width: 340px) {
+    .card{
+        width: 200px;
+        height: 150px;
+        font-size: 10px;
+    }
+
+    .show-img{
+        width: 70%;
+        height: 70%;
+    }
 }

@@ -14,6 +14,9 @@ const ShowCard = (props) => {
             <span>
                 Language: {props.language}
             </span>
+            <button className='book-button'>
+                Book This Show
+            </button>
         </div>
     </div>
   );
