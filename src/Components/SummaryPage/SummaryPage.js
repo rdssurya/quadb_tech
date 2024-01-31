@@ -6,10 +6,30 @@ const SummaryPage = () => {
   const { state } = useLocation();
   const [buttonClicked, setButtonClicked] = useState(false);
   const [ticketsBooked, setTicketsBooked] = useState(false);
+  const [detailsNotFilled, setDetailsNotFilled] = useState(false);
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState(0);
 
-  const handleBooking = () => {
-    setTicketsBooked(true);
-    setTimeout(()=>{setTicketsBooked(false)}, 2000);
+  const handleBooking = (e) => {
+    e.preventDefault();
+    if(name && number>0){
+      setTicketsBooked(true);
+      const obj = {
+        userName: name,
+        numberOfTickets: number,
+        showName: state.show.name,
+        showLanguage: state.show.language,
+        showRuntime: state.show.runtime
+      }
+      localStorage.setItem('userDetails',JSON.stringify(obj));
+      setTimeout(()=>{setTicketsBooked(false)}, 2000);
+      setName('');
+      setNumber(0);
+    }
+    else{
+      setDetailsNotFilled(true);
+      setTimeout(()=>{setDetailsNotFilled(false)}, 2000);
+    }
   }
   
   return (
@@ -21,23 +41,39 @@ const SummaryPage = () => {
             <span>Show Name: <b>{state.show.name}</b></span>
             <span>Language: <b>{state.show.language}</b></span>
             <span>Type: <b>{state.show.type}</b></span>
-            <span>Runtime: <b>{state.show.runtime} mins</b></span>
+            <span>Runtime: <b>{state.show.runtime ? state.show.runtime:60} mins</b></span>
           </div>
         </div>
         <div>
           <span><u><b>SUMMARY:</b></u> </span>
           <span dangerouslySetInnerHTML={{ __html: state.show.summary }} />
-          <button className='book-tickets-button' onClick={() => setButtonClicked(true)}>Book Tickets</button>
+          <button className='book-tickets-button' onClick={() => setButtonClicked(!buttonClicked)}>Close / Open Bookings</button>
         </div>
       </div>
-      <div className='form-details' style={{display: buttonClicked ? 'flex' : 'none'}}>
+      <form className='form-details' style={{display: buttonClicked ? 'flex' : 'none'}}>
+          <div style={{textAlign:'center', width:'100%',fontSize:'20px'}}><b><u>Fill in your details</u></b></div>
           <span>Show Name: <b>{state.show.name}</b></span>
-          <span>Language: <b>{state.show.schedule.time}</b></span>
+          <span>Language: <b>{state.show.language}</b></span>
           <span>Type: <b>{state.show.type}</b></span>
-          <span>Runtime: <b>{state.show.runtime} mins</b></span>
-          <button onClick={handleBooking}>BOOK</button>
+          <span>Runtime: <b>{state.show.runtime ? state.show.runtime:60} mins</b></span>
+          <span>Name: <input 
+                          type="text" 
+                          placeholder='Please enter your name' 
+                          onChange={(e)=>setName(e.target.value)} 
+                          value={name}
+                          /></span>
+          <span>No. of tickets: <input 
+                                  type="number" 
+                                  min="1" 
+                                  max="100" 
+                                  step="1" 
+                                  onChange={(e)=>setNumber(e.target.value)} 
+                                  value={number} 
+                                  /></span>
+          <button onClick={handleBooking} type="submit" className='book-tickets-button'>BOOK</button>
           {ticketsBooked && <span className='happy-msg'>Yayy! Tickets Booked Successfully!</span>}
-      </div>
+          {detailsNotFilled && <span className='error-msg'>Please enter valid details...</span>}
+      </form>
     </div>
   );
 };
